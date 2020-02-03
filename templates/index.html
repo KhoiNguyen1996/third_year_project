@@ -58,12 +58,12 @@
                     </div>
                 </div>
                 <div class="column_3">
-                <select name="selected_model" method="GET">
-                    {% for model in model_names %}
-                    <option value= "{{ model_names[model] }}" selected>{{ model }}</option>"
-                    {% endfor %}
-                </select>
-                </div>
+                    <select name="selected_model" method="GET">
+                        {% for model in model_names %}
+                        <option value= "{{ model_names[model] }}" selected>{{ model }}</option>"
+                        {% endfor %}
+                    </select>
+                    </div>
                 <div class="column_3">
                     <div class="wrapper">
                         <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
