@@ -43,36 +43,42 @@
     </nav>
 
     <main class="Site-content">
-        <div class="jumbotron" style="margin-bottom:0; background-color:#3F51B5;color:#fff">
+        <div class="jumbotron" style="margin-bottom:0; background-color:#9576cd;color:#fff">
             <h2 class="display-4" style="text-align:center;color:whitesmoke">Name Entity Visualizer using spaCy</h2>
             <p style="font-size:large; text-align:center;color:whitesmoke;">Input a sentence or paragraph the software will extract Adverse Drug Reaction name entities</p>
-            <form method="POST" action="{{ url_for('extract')}}">
-                <div class="column_3">
-                    <div class="wrapper">
+            <form method="POST" action="{{ url_for('extract') }}">
+                <div class="wrapper">
+
+                <div class="text-center">
+
+                <div class="btn-group" style="align-items: center;">
+
                         <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
-                    </div>
-                </div>
-                <div class="column_3">
-                    <div class="wrapper">
+
+ 
                         <a class="btn btn-success waves-effect" href="/" role="button">Refresh &raquo;</a>
-                    </div>
-                </div>
-                <div class="column_3">
-                    <select name="selected_model" method="GET">
-                        {% for model in model_names %}
-                        <option value= "{{ model_names[model] }}" selected>{{ model }}</option>"
-                        {% endfor %}
-                    </select>
-                    </div>
-                <div class="column_3">
-                    <div class="wrapper">
+
+
                         <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
                     </div>
                 </div>
+            </div>
+
+                    <div class="wrapper">
+                            <select class="browser-default custom-select" name="selected_model" method="GET">
+                                {% for model in model_names %}
+                                <option value= "{{ model_names[model] }}" selected>{{ model }}</option>"
+                                {% endfor %}
+                                <option value= "en_core_web_sm" selected>Please select a pretrained Name Entity Recognition model</option>
+                            </select>
+            </div>
+
                 <div class="textarea-container" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
                     <textarea class="form-control z-depth-1" name="rawtext" rows="13" placeholder="Please write something here and press the submit button..."></textarea>
                 </div>
+
             </form>
+        
         </div>
 
         <div class="jumbotron" style="text-align:center;margin-bottom:0;background-color: #FF4C7C;color:#fff">
@@ -143,7 +149,7 @@
             </div>
         </div>
 
-        <div class="container-fluid" style="margin-top:50px;margin-bottom:50px; background-color:#673AB7; width: 50%;">
+        <div class="container-fluid" style="margin-top:50px;margin-bottom:50px; width: 50%;">
             <h2 class="display-4" style="font-size:xx-large;color:whitesmoke;">There are hidden sentences used as training data here, can you find it?</h2>
             <img alt="UoM" src="{{ url_for('static',filename='/spacy_logo.png') }}" class="center">
             <div class="centered">@opium_district I've been having them today too, three days without effexor. I completely understand what you mean. every hit, lightheaded.

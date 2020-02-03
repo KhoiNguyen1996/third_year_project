@@ -9,9 +9,8 @@
 
     <!-- Import preset css stylesheet -->
     <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static',filename='css/main_page.css') }}"/>
-
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Advent Pro" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
@@ -44,35 +43,46 @@
     </nav>
 
     <main class="Site-content">
-        <div class="jumbotron" style="margin-bottom:0; background-color: #3F51B5;color:#fff">
-
+        <div class="jumbotron" style="margin-bottom:0; background-color:#9576cd;color:#fff">
             <h2 class="display-4" style="text-align:center;color:whitesmoke">Name Entity Visualizer using spaCy</h2>
             <p style="font-size:large; text-align:center;color:whitesmoke;">Input a sentence or paragraph the software will extract Adverse Drug Reaction name entities</p>
             <form method="POST" action="{{ url_for('extract')}}">
-                <div class="column_3">
-                    <div class="wrapper">
-                        <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
-                    </div>
-                </div>
-                <div class="column_3">
-                    <div class="wrapper">
-                        <a class="btn btn-success waves-effect" href="/" role="button">Refresh &raquo;</a>
-                    </div>
-                </div>
+                <div class="wrapper">
 
-                <div class="column_3">
-                    <div class="wrapper">
+                <div class="text-center">
+
+                <div class="btn-group" style="align-items: center;">
+
+                        <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
+
+ 
+                        <a class="btn btn-success waves-effect" href="/" role="button">Refresh &raquo;</a>
+
+
                         <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
                     </div>
                 </div>
-                <div class="textarea-container" style="width:85%;display:block;margin-left: auto;margin-right: auto;">
-                    <textarea class="form-control z-depth-1" name="rawtext" rows="13" placeholder="Write something here..."></textarea>
+            </div>
+
+                    <div class="wrapper">
+                            <select class="browser-default custom-select" name="selected_model" method="GET">
+                                <option disabled="disabled">Please select a pretrained Name Entity Recognition model</option>
+                                {% for model in model_names %}
+                                <option value= "{{ model_names[model] }}" selected>{{ model }}</option>"
+                                {% endfor %}
+                            </select>
+            </div>
+
+                <div class="textarea-container" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
+                    <textarea class="form-control z-depth-1" name="rawtext" rows="13" placeholder="Please write something here and press the submit button..."></textarea>
                 </div>
+
             </form>
+        
         </div>
 
 <!-- Displaying original input -->
-<div class="jumbotron" style="text-align:center;background-color:#D5609F;color:#fff">
+<div id="start_pos" class="jumbotron" style="text-align:center;background-color:#D5609F;color:#fff">
 	<div class="row">
 		<div class="col-md-6">
       <h4>Input Data</h4>
@@ -94,6 +104,9 @@
 </div>
 	
 
+</div>
+<div class="container-fluid" style="margin-top:50px;margin-bottom:50px; width: 50%;">
+    <img alt="UoM" src="{{ url_for('static',filename='/spacy_logo.png') }}" class="center">
 </div>
 </main>
 
@@ -141,6 +154,13 @@
 <!-- Bootstrap JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+            $('html, body').animate({
+                scrollTop: $('#start_pos').offset().top
+            }, 'slow');
+        });
+</script>
 
 <!--Script to load javascript file -->
 <script src="{{ url_for('static', filename='js/main.js')}}"></script>
