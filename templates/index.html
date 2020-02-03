@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Extracting ADRs name entities from text - spaCy</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Advent Pro" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static',filename='css/main_page.css') }}"/>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.3/css/mdb.min.css" rel="stylesheet">
+
+</head>
+
+<body class="Site">
+    <nav class="navbar fixed-top navbar-dark">
+        <!--<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">-->
+        <a class="navbar-brand" href="/"><img alt="My Logo" src="{{url_for('static',filename='/logo_default.png')}}" height="20" width="25"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul style="text-align:center;" class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/previewer">Previewer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="Site-content">
+        
+        <div class="jumbotron" style="background:transparent;background: #9796f0; background: -webkit-linear-gradient(to right, #fbc7d4, #9796f0); background: linear-gradient(to right, #fbc7d4, #9796f0);">
+            <h1 style="text-align:center;color:whitesmoke;">Name Entity Recognition using spaCy</h1>
+            <p style="text-align:center;color:whitesmoke;">Input sentences or paragraph the software will extract Adverse Drug Reaction name entities</p>
+            <form method="POST" action="{{ url_for('extract')}}">
+                <div class="row" style="padding-left: 20.69%;">
+                <div class="column_3">
+                <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
+                </div>
+                <div class="column_3">
+                <a class="btn btn-success waves-effect" href="/" role="button">Refresh &raquo;</a>
+                </div>
+                <div class="column_3">
+                <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+            </div>
+        </div>
+
+                <div class="textarea-container" style="width: 60%;display: block;margin-left: auto;margin-right: auto;">
+                    <textarea class="form-control z-depth-1" name="rawtext" rows="10" placeholder="Write something here...">@opium_district I've been having them today too, three days without effexor. I completely understand what you mean. every hit, lightheaded..
+@kevinmd Even w the best care a patient can die from Avandia, Vioxx, get kidney failure from Cipro or commit suicide on new antidepressants
+Renal failure appeared 8 to 17 days after beginning gentamicin therapy and was characterized by creatinine clearances 4 to 10 ml/min, urine to plasma creatinine ratios less than 20, urinary sodium concentrations 16 to 60 mEq/liter, proteinuria, and cylindruria.
+We describe a patient with a liver abscess due to Entamoeba histolytica, in whom metronidazole therapy (total dose, 21 g over 14 days) was complicated by reversible deafness, tinnitus, and ataxia and who relapsed 5 months later with a splenic abscess.
+1. Changes in the plasma cortisol level were reported in a male patient with panic disorder during the period of low-dose alprazolam treatment (mean 0.62 +/- 0.15 mg/day) compared with during the period of high-dose period (mean 1.08 +/- 0.28 mg/day).
+A patient is presented with typical hyperthyroidism, who developed a severe proximal muscle weakness and a raised creatine phosphokinase after treatment for hyperthyroidism with propylthiouracil (100 mg orally, three times a day).</textarea>
+                </div>
+            </form>
+
+        
+
+        </div>
+        <div class="container-fluid" style="margin-top: 50px; background-color:#9575cd; width: 50%;">
+            <img alt="UoM" src="{{ url_for('static',filename='/spacy_logo.png') }}" class="center">
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer fixed-bottom mdb-color font-small pt-3">
+        <div class="column left">
+            <ul class="list-unstyled list-inline text-center">
+                <a>Third Year Project by Khoi Nguyen</a>
+            </ul>
+            <ul class="list-unstyled list-inline text-center">
+                <li class="list-inline-item">
+                    <a href="http://studentnet.cs.manchester.ac.uk/ugt/year3/project/projectbookdetails.php?projectid=37983">Text Mining Adverse Drug Reactions from Social Media © 2020</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Footer Elements -->
+        <div class="column right">
+            <!-- Social buttons -->
+            <ul class="list-unstyled list-inline text-center">
+                <li class="list-inline-item">
+                  <a class="btn-floating btn-tw mx-1">
+                      <i class="fab fa-twitter"> </i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://github.com/KhoiNguyen1996" target="_blank" class="btn-floating btn-git mx-1">
+                        <i class="fab fa-github"> </i>
+                    </a>
+                </li>
+
+                <li class="list-inline-item">
+                    <a href="https://www.linkedin.com/in/khoinguyen-1996/" target="_blank" class="btn-floating btn-li mx-1">
+                        <i class="fab fa-linkedin-in"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://spacy.io/" target="_blank">
+                        <img alt="spaCy" src="{{url_for('static',filename ='/spacy_logo_opaque.png')}}" height="40">
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.manchester.ac.uk/" target="_blank">
+                        <img alt="UoM" src="{{url_for('static',filename='/uom_logo.png')}}" height="40">
+                    </a>
+                </li>
+
+            </ul>
+            <!-- Social buttons -->
+        </div>
+        <!-- Footer Elements -->
+
+    </footer>
+    <!-- Footer -->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.3/js/mdb.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+    <script type="text/javascript">
+        $('.file_upload').file_upload();
+    </script>
+
+</body>
+
+</html>
