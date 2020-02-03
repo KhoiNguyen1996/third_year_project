@@ -4,6 +4,7 @@ activated = spacy.prefer_gpu()
 from spacy import displacy
 import json
 import os
+from textblob import TextBlob 
 
 # HTML_WRAPPER for spaCy NER rendering.
 HTML_WRAPPER = """<div style="overflow-x: auto; padding: 1rem">{}</div>"""
@@ -36,6 +37,12 @@ def get_models(d):
 
 	return(result)
 
+# Function to measure text sentiment.
+# Trained on Twitter dataset.
+def get_tweet_sentiment(tweet):
+    analysis = TextBlob(tweet)
+    return(analysis.sentiment.polarity)
+
 import sys
 # print(get_models(MODEL_PATH), file=sys.stderr)
 
@@ -57,9 +64,12 @@ def extract():
 		raw_text = request.form['rawtext']
 		docx = nlp(raw_text)
 
+		# Disable color scheme for spaCy model.
+		if selected_model == "en_core_web_sm" or selected_model == "en_core_web_md":
+			html = displacy.render(docx,style="ent")
+		else:
+			html = displacy.render(docx,style="ent", options=OPTIONS)	
 
-
-		html = displacy.render(docx,style="ent", options=OPTIONS)
 		html = html.replace("\n\n","\n")
 		result = HTML_WRAPPER.format(html)
 
@@ -88,7 +98,6 @@ def preview():
 		result = newtext
 
 	return render_template('preview.html',newtext=newtext,result=result)
-
 
 if __name__ == '__main__':
 	app.run(debug=True)
