@@ -1,55 +1,82 @@
 from flask import Flask,url_for,render_template,request
 import spacy
+activated = spacy.prefer_gpu()
 from spacy import displacy
-nlp = spacy.load('C:/Users/khoin/Desktop/project_code/third_year_project/pretrained_model/spacy/temp')
 import json
+import os
 
-HTML_WRAPPER = """<div style="overflow-x: auto; border: 1px solid #e6e9ef; border-radius: 0.25rem; padding: 1rem">{}</div>"""
+# HTML_WRAPPER for spaCy NER rendering.
+HTML_WRAPPER = """<div style="overflow-x: auto; padding: 1rem">{}</div>"""
 
 from flaskext.markdown import Markdown
 
-#app = Flask(__name__)
+# Empty model just for rendering text.
+nlp_empty =spacy.blank("en")
+
 app = Flask(__name__,static_url_path="",static_folder="img")
 Markdown(app)
 
-#doc = nlp("We describe a patient with a liver abscess due to Entamoeba histolytica, in whom metronidazole therapy (total dose, 21 g over 14 days) was complicated by reversible deafness, tinnitus, and ataxia and who relapsed 5 months later with a splenic abscess.")
-#for ent in doc.ents:
-#    print(ent.label_, ent.text)
-#exit()
+MODEL_PATH="./pretrained_model/spacy"
 
-# def analyze_text(text):
-# 	return nlp(text)
+# Preset color and tag template for symptoms, drugs and dosage.
+adr_ner_colors = {"SYMP": "#9370DB", "DRUG": "#F58B4C", "DOSE": "#B5C689"}
+OPTIONS = {"ents": ["SYMP","DRUG","DOSE"], "colors": adr_ner_colors}
 
-@app.route('/')
+
+# Input is the file directory of the models (hard coded)
+# Return a dictionary of pretrained model name and it's path.
+def get_models(d):
+	result = {}
+	for f in os.listdir(d):
+		result[f]=os.path.join(d, f)
+
+	# Add 2 spaCy pre-trained model.
+	result["en_core_web_sm"]="en_core_web_sm"
+	result["en_core_web_md"]="en_core_web_md"
+
+	return(result)
+
+import sys
+# print(get_models(MODEL_PATH), file=sys.stderr)
+
+# Landing page of the application.
+# Require model paths to be load.
+@app.route('/',methods=["GET"])
 def index():
-	# raw_text = "Bill Gates is An American Computer Scientist since 1986"
-	# docx = nlp(raw_text)
-	# html = displacy.render(docx,style="ent")
-	# html = html.replace("\n\n","\n")
-	# result = HTML_WRAPPER.format(html)
-
-	return render_template('index.html')
-
+	model_names = get_models(MODEL_PATH)
+	return render_template('index.html', model_names=model_names)
 
 @app.route('/extract',methods=["GET","POST"])
 def extract():
 	if request.method == 'POST':
+		# Initiate model depending on user's choice.
+		selected_model = request.form['selected_model']
+		nlp = spacy.load(os.path.join(selected_model))
+
+		# Extract and analyse text
 		raw_text = request.form['rawtext']
 		docx = nlp(raw_text)
-		# Preset template for symptoms and drugs.
-		colors = {"SYMP": "#9370DB", "DRUG": "#F58B4C", "DOSE": "#B5C689"}
-		options = {"ents": ["SYMP","DRUG","DOSE"], "colors": colors}
 
-		# NER for Symptom and Drug names.
-		#doc=nlp(sample_sentence)
-		#displacy.render(doc, style="ent", jupyter=True, options=options)
-		html = displacy.render(docx,style="ent", options=options)
+
+
+		html = displacy.render(docx,style="ent", options=OPTIONS)
 		html = html.replace("\n\n","\n")
 		result = HTML_WRAPPER.format(html)
 
+		doc=nlp_empty(raw_text)
+		html = displacy.render(doc,style="ent")
+		html = html.replace("\n\n","\n")
+		raw_text = HTML_WRAPPER.format(html)
+
 	return render_template('result.html',rawtext=raw_text,result=result)
 
+# About page of the application.
+# Self-introduction, motivation, summarise.
+@app.route('/about')
+def about_me():
+	return render_template('about.html')
 
+# No idea about these 2 functions. Modify later.
 @app.route('/previewer')
 def previewer():
 	return render_template('previewer.html')
