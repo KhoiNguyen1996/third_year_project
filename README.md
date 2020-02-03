@@ -3,5 +3,5 @@ According to the Food and Drug Administration agency, ADRs are a major public he
 
 Related papers: 
 
-[1] https://www.sciencedirect.com/science/article/pii/S1532046416300508
-[2] https://academic.oup.com/jamia/article/22/3/671/776531
+1. https://www.sciencedirect.com/science/article/pii/S1532046416300508
+2. https://academic.oup.com/jamia/article/22/3/671/776531
