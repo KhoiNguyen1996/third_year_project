@@ -1,15 +1,16 @@
-from flask import Flask,url_for,render_template,request
-import spacy
-activated = spacy.prefer_gpu()
-from spacy import displacy
 import json
 import os
+import re
+import spacy
+activated = spacy.prefer_gpu()
+from flask import Flask,url_for,render_template,request
+from flaskext.markdown import Markdown
+from spacy import displacy
 from textblob import TextBlob 
 
 # HTML_WRAPPER for spaCy NER rendering.
 HTML_WRAPPER = """<div style="overflow-x: auto; padding: 1rem">{}</div>"""
 
-from flaskext.markdown import Markdown
 
 # Empty model just for rendering text.
 nlp_empty =spacy.blank("en")
@@ -28,20 +29,24 @@ OPTIONS = {"ents": ["SYMP","DRUG","DOSE"], "colors": adr_ner_colors}
 # Return a dictionary of pretrained model name and it's path.
 def get_models(d):
 	result = {}
-	for f in os.listdir(d):
-		result[f]=os.path.join(d, f)
 
-	# Add 2 spaCy pre-trained model.
+	# Add 2 spaCy pretrained default models.
 	result["en_core_web_sm"]="en_core_web_sm"
 	result["en_core_web_md"]="en_core_web_md"
 
+	for f in os.listdir(d):
+		result[f]=os.path.join(d, f)
 	return(result)
 
-# Function to measure text sentiment.
-# Trained on Twitter dataset.
+def clean_string(tweet): 
+	return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+  
+# Sentimental Analysis function, using pretrained model
+# TextBlob - Trained on Twitter dataset
 def get_tweet_sentiment(tweet):
-    analysis = TextBlob(tweet)
-    return(analysis.sentiment.polarity)
+	tweet = clean_string(tweet)
+	analysis = TextBlob(tweet)
+	return(analysis.sentiment.polarity)
 
 import sys
 # print(get_models(MODEL_PATH), file=sys.stderr)
@@ -78,7 +83,13 @@ def extract():
 		html = html.replace("\n\n","\n")
 		raw_text = HTML_WRAPPER.format(html)
 
-	return render_template('result.html',rawtext=raw_text,result=result)
+		# Initialise the drop-box again.
+		model_names = get_models(MODEL_PATH)
+
+		# Polarity Analysis
+		print(("%s polarity score is %s")%(raw_text,str(get_tweet_sentiment(raw_text))), file=sys.stderr)
+
+		return render_template('result.html', rawtext=raw_text, result=result, model_names=model_names)
 
 # About page of the application.
 # Self-introduction, motivation, summarise.
