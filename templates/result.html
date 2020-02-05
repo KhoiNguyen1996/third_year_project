@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Import preset css stylesheet -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static',filename='css/main_page.css') }}"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static',filename='css/main_page.css') }}" />
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Advent Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
@@ -43,132 +43,127 @@
     </nav>
 
     <main class="Site-content">
-        <div class="jumbotron" style="margin-bottom:0; background-color:#9576cd;color:#fff">
+        <div class="jumbotron" style="margin-bottom:0; background-color:transparent;color:#fff">
             <h2 class="display-4" style="text-align:center;color:whitesmoke">Name Entity Visualizer using spaCy</h2>
-            <p style="font-size:large; text-align:center;color:whitesmoke;">Input a sentence or paragraph the software will extract Adverse Drug Reaction name entities</p>
+            <p style="font-size:medium; text-align:center;color:whitesmoke;">Select a model then input a sentence or paragraph the software will extract Adverse Drug Reaction name entities</p>
             <form method="POST" action="{{ url_for('extract')}}">
                 <div class="wrapper">
 
-                <div class="text-center">
+                    <div class="text-center">
 
-                <div class="btn-group" style="align-items: center;">
+                        <div class="btn-group" style="align-items: center;">
 
-                        <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
+                            <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
 
- 
-                        <a class="btn btn-success waves-effect" href="/" role="button">Refresh &raquo;</a>
+                            <a class="btn btn-success waves-effect" href="/" role="button">Refresh &raquo;</a>
 
-
-                        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-                    <div class="wrapper">
-                            <select class="browser-default custom-select" name="selected_model" method="GET">
-                                <option disabled="disabled">Please select a pretrained Name Entity Recognition model</option>
-                                {% for model in model_names %}
-                                <option value= "{{ model_names[model] }}" selected>{{ model }}</option>"
-                                {% endfor %}
-                            </select>
-            </div>
+                <div class="wrapper">
+                    <select class="browser-default custom-select" name="selected_model" method="GET">
+                        <option value="en_core_web_sm" disabled="disabled" >Please select a pretrained Name Entity Recognition model</option>
+                        {% for model in model_names %}
+                        <option value="{{ model_names[model] }}" selected>{{ model }}</option>" {% endfor %}
+                    </select>
+                </div>
 
                 <div class="textarea-container" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
                     <textarea class="form-control z-depth-1" name="rawtext" rows="13" placeholder="Please write something here and press the submit button..."></textarea>
                 </div>
 
             </form>
-        
+
         </div>
 
-<!-- Displaying original input -->
-<div id="start_pos" class="jumbotron" style="text-align:center;background-color:#D5609F;color:#fff">
-	<div class="row">
-		<div class="col-md-6">
-      <h4>Input Data</h4>
+        <!-- Displaying original input -->
+        <div id="start_pos" class="jumbotron" style="text-align:center;background-color:#D5609F;color:#fff">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Input Data</h4>
 
-          <div class="card mb-10 shadow-sm" id="column_original">
-          	<p>{{ rawtext|markdown }}</p>
-			
-		</div>
-  </div>
-<!-- Displaying name entity result from model -->
-	<div class="col-md-6">
-    <h4>Output Data with NER</h4>
+                    <div class="card mb-10 shadow-sm" id="column_original">
+                        <p>{{ rawtext|markdown }}</p>
 
-          <div class="card mb-10 shadow-sm" id="column_result">
-			<p>{{ result|markdown }}</p>
-			
-		</div>
-	</div>
-</div>
-	
+                    </div>
+                </div>
+                <!-- Displaying name entity result from model -->
+                <div class="col-md-6">
+                    <h4>Output Data with NER</h4>
 
-</div>
-<div class="container-fluid" style="margin-top:50px;margin-bottom:50px; width: 50%;">
-    <img alt="UoM" src="{{ url_for('static',filename='/spacy_logo.png') }}" class="center">
-</div>
-</main>
+                    <div class="card mb-10 shadow-sm" id="column_result">
+                        <p>{{ result|markdown }}</p>
 
-<footer class="page-footer font-small pt-3" style="background:transparent">
-  <div class="container">
-      <ul class="list-unstyled list-inline text-center">
-          <li class="list-inline-item">
-              <a class="btn-floating btn-tw mx-1">
-                  <i class="fab fa-twitter"> </i>
-              </a>
-          </li>
-          <li class="list-inline-item">
-              <a href="https://github.com/KhoiNguyen1996" target="_blank" class="btn-floating btn-git mx-1">
-                  <i class="fab fa-github"> </i>
-              </a>
-          </li>
-          <li class="list-inline-item">
-              <a href="https://www.linkedin.com/in/khoinguyen-1996/" target="_blank" class="btn-floating btn-li mx-1">
-                  <i class="fab fa-linkedin-in"> </i>
-              </a>
-          </li>
-          <li class="list-inline-item">
-              <a href="https://spacy.io/" target="_blank">
-                  <img alt="spaCy" src="{{url_for('static',filename ='/spacy_logo_opaque.png')}}" height="40">
-              </a>
-          </li>
-          <li class="list-inline-item">
-              <a href="https://www.manchester.ac.uk/" target="_blank">
-                  <img alt="UoM" src="{{url_for('static',filename='/uom_logo.png')}}" height="40">
-              </a>
-          </li>
-      </ul>
-  </div>
+                    </div>
+                </div>
+            </div>
 
-  <div class="footer-copyright text-center mdb-color py-3" href="http://studentnet.cs.manchester.ac.uk/ugt/year3/project/projectbookdetails.php?projectid=37983">
-      <a>Text Mining Adverse Drug Reactions from Social Media © 2020</a>
-      <a>by Khoi Nguyen</a>
-  </div>
-</footer>
+        </div>
+        <div class="container-fluid" style="margin-top:50px;margin-bottom:50px; width: 50%;">
+            <img alt="UoM" src="{{ url_for('static',filename='/spacy_logo.png') }}" class="center">
+        </div>
+    </main>
 
-<!-- MDB -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.3/js/mdb.min.js"></script>
-<!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function () {
+    <footer class="page-footer font-small pt-3" style="background:transparent">
+        <div class="container">
+            <ul class="list-unstyled list-inline text-center">
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-tw mx-1">
+                        <i class="fab fa-twitter"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://github.com/KhoiNguyen1996" target="_blank" class="btn-floating btn-git mx-1">
+                        <i class="fab fa-github"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.linkedin.com/in/khoinguyen-1996/" target="_blank" class="btn-floating btn-li mx-1">
+                        <i class="fab fa-linkedin-in"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://spacy.io/" target="_blank">
+                        <img alt="spaCy" src="{{url_for('static',filename ='/spacy_logo_opaque.png')}}" height="40">
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.manchester.ac.uk/" target="_blank">
+                        <img alt="UoM" src="{{url_for('static',filename='/uom_logo.png')}}" height="40">
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-copyright text-center mdb-color py-3" href="http://studentnet.cs.manchester.ac.uk/ugt/year3/project/projectbookdetails.php?projectid=37983">
+            <a>Text Mining Adverse Drug Reactions from Social Media © 2020</a>
+            <a>by Khoi Nguyen</a>
+        </div>
+    </footer>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.3/js/mdb.min.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
             $('html, body').animate({
                 scrollTop: $('#start_pos').offset().top
             }, 'slow');
         });
-</script>
+    </script>
 
-<!--Script to load javascript file -->
-<script src="{{ url_for('static', filename='js/main.js')}}"></script>
-<script type="text/javascript">
-  $('.file_upload').file_upload();
-</script>
+    <!--Script to load javascript file -->
+    <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+    <script type="text/javascript">
+        $('.file_upload').file_upload();
+    </script>
 
 </body>
 
 </html>
-

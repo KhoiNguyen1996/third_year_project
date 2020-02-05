@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Import preset css stylesheet -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static',filename='css/main_page.css') }}"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static',filename='css/main_page.css') }}" />
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Advent Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
@@ -43,42 +43,39 @@
     </nav>
 
     <main class="Site-content">
-        <div class="jumbotron" style="margin-bottom:0; background-color:#9576cd;color:#fff">
+        <div class="jumbotron" style="margin-bottom:0;background-color:transparent;color:#fff">
             <h2 class="display-4" style="text-align:center;color:whitesmoke">Name Entity Visualizer using spaCy</h2>
-            <p style="font-size:large; text-align:center;color:whitesmoke;">Input a sentence or paragraph the software will extract Adverse Drug Reaction name entities</p>
+            <p style="font-size:medium; text-align:center;color:whitesmoke;">Select a model then input a sentence or paragraph the software will extract Adverse Drug Reaction name entities</p>
             <form method="POST" action="{{ url_for('extract') }}">
                 <div class="wrapper">
 
-                <div class="text-center">
+                    <div class="text-center">
 
-                <div class="btn-group" style="align-items: center;">
+                        <div class="btn-group" style="align-items: center;">
 
-                        <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
+                            <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
 
- 
-                        <a class="btn btn-success waves-effect" href="/" role="button">Refresh &raquo;</a>
+                            <a class="btn btn-success waves-effect" href="/" role="button">Refresh &raquo;</a>
 
-
-                        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-                    <div class="wrapper">
-                            <select class="browser-default custom-select" name="selected_model" method="GET">
-                                {% for model in model_names %}
-                                <option value= "{{ model_names[model] }}" selected>{{ model }}</option>"
-                                {% endfor %}
-                                <option value= "en_core_web_sm" selected>Please select a pretrained Name Entity Recognition model</option>
-                            </select>
-            </div>
+                <div class="wrapper">
+                    <select class="browser-default custom-select" name="selected_model" method="GET">
+                        <option disabled="disabled" >Please select a pretrained Name Entity Recognition model</option>
+                        {% for model in model_names %}
+                        <option value="{{ model_names[model] }}" selected>{{ model }}</option>" {% endfor %}
+                    </select>
+                </div>
 
                 <div class="textarea-container" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
                     <textarea class="form-control z-depth-1" name="rawtext" rows="13" placeholder="Please write something here and press the submit button..."></textarea>
                 </div>
 
             </form>
-        
+
         </div>
 
         <div class="jumbotron" style="text-align:center;margin-bottom:0;background-color: #FF4C7C;color:#fff">
@@ -95,33 +92,31 @@
                         <li style="margin:8px 0;">
                             <i class="fa-li fa fa-spinner fa-spin"></i>I have chosen spaCy because it is extremely <b>robust</b>, <b>fast</b> and <b>flexible</b> since you can intergrate deep learning model easily.
                         </li>
-                        </ul>
+                    </ul>
                 </li>
                 <li class="list-group-item" style="background:transparent;border-style:none;">
                     <h2 class="display-4" style="font-size:xx-large;color:whitesmoke;">What is <b style="font-size:xx-large;">ADRs</b> (adverse drug reactions)?</h2>
                     <ul class="fa-ul">
-                    <li style="margin:8px 0;">
-                        <i class="fa-li fa fa-spinner fa-spin"></i>It’s often can be defined as “an unexpected or harmful reaction experienced following the administration of a drug or combination of drugs”.
-                    </li>
-                    <li style="margin:8px 0;">
-                        <i class="fa-li fa fa-spinner fa-spin"></i>The reaction can be either due to dosage, allergic drug reaction or idiosyncratic (unknown cause).
-                    </li>
-                    <li style="margin:8px 0;">
-                        <i class="fa-li fa fa-spinner fa-spin"></i>Spontaneous reporting systems (SRS) is currently used to monitor and detect ADRs. "However, it is estimated that more than 90% of the ADRs still remain unreported, showing the limited effectiveness of SRS" *
-                    </li>
+                        <li style="margin:8px 0;">
+                            <i class="fa-li fa fa-spinner fa-spin"></i>It’s often can be defined as “an unexpected or harmful reaction experienced following the administration of a drug or combination of drugs”.
+                        </li>
+                        <li style="margin:8px 0;">
+                            <i class="fa-li fa fa-spinner fa-spin"></i>The reaction can be either due to dosage, allergic drug reaction or idiosyncratic (unknown cause).
+                        </li>
+                        <li style="margin:8px 0;">
+                            <i class="fa-li fa fa-spinner fa-spin"></i>Spontaneous reporting systems (SRS) is currently used to monitor and detect ADRs. "However, it is estimated that more than 90% of the ADRs still remain unreported, showing the limited effectiveness of SRS" *
+                        </li>
                     </ul>
                 </li>
             </ul>
 
         </div>
 
-
-
         <div class="jumbotron" style="text-align:center;margin-bottom:0;background-color:#D5609F;color:#fff">
             <li class="list-group-item" style="background:transparent;border-style:none;">
                 <h2 class="display-4" style="font-size:xx-large;color:whitesmoke;">What library and machine learning model did I use?</h2>
                 <p>For my project, I will be using various NLP techniques to be able to extract entities involved in ADRs from a given input message. There are 3 components/stages that are fundamental in a machine learning project: Data, Model and Interpretation of result. The data was provided by Dr Sophia and it’s consisted of social media Tweet messages, Cadec and Corpus of various Biology textbooks with the drug name, symptoms and treatments labelled. We will be using various packages such as NLTK, Spacy, NumPy and many more machine learning related library to implement this project.
-            </p>
+                </p>
             </li>
             <div class="container" style="margin-top: 5vh;">
                 <ul class="list-unstyled list-inline text-center">
@@ -147,16 +142,15 @@
                     </li>
                 </ul>
             </div>
+            <h2 class="display-4" style="font-size:larger;color:whitesmoke;">There are hidden sentences used as training data here, can you find it?</h2>
         </div>
 
         <div class="container-fluid" style="margin-top:50px;margin-bottom:50px; width: 50%;">
-            <h2 class="display-4" style="font-size:xx-large;color:whitesmoke;">There are hidden sentences used as training data here, can you find it?</h2>
             <img alt="UoM" src="{{ url_for('static',filename='/spacy_logo.png') }}" class="center">
-            <div class="centered">@opium_district I've been having them today too, three days without effexor. I completely understand what you mean. every hit, lightheaded.
-
-            @kevinmd Even w the best care a patient can die from Avandia, Vioxx, get kidney failure from Cipro or commit suicide on new antidepressants.
-
-            @_cimmy_ thanks! yes, after I was prescribed Cipro a few years ago, and it REALLY messed me up, I am quite wary of broad spectrum ones.
+            <div class="centered">Pheripheral edema was observed in five female patients after taking proton pump inhibitors omeprazole, lansoprazole, or pantoprazole for 7-15 days for peptic acid diseases in recommended standard doses.
+            The Fluoroquinolone Syndrome -Have you experienced side effects from taking Quinolones antibiotics (e.g. Cipro) ? 
+            We describe the infectious toxicities experienced by the first two patients in our institution treated with dexamethasone (10 mg/m(2)/day for 4 weeks with gradual tapering) during induction according to the dexamethasone arm of BFM 2000 and review the relevant literature that suggests an increased risk of infectious complications with dexamethasone.
+            @calyxxx same with venlafaxine, 1 user I spoke to yrs ago stopped taking that when she started having acid like trips losing hours at a time
             </div>
         </div>
 
