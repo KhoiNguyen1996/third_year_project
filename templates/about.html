@@ -44,8 +44,30 @@
     </nav>
 
     <main class="Site-content">
-        
-        <div class="jumbotron" style="background:transparent;background: #9796f0; background: -webkit-linear-gradient(to right, #fbc7d4, #9796f0); background: linear-gradient(to right, #fbc7d4, #9796f0);">
+        <div class="jumbotron" style="text-align:center;margin-bottom:0;background-color: #FF4C7C;color:#fff">
+            <ul class="list-group">
+                <li class="list-group-item" style="background:transparent;border-style:none;">
+                    <h2 class="display-4" style="font-size:xx-large;color:whitesmoke;">Why is this project <b style="font-size:xx-large;">important</b>?</h2>
+                    <ul class="fa-ul">
+                        <li style="margin:10px 0;">
+                            <i class="fa-li fa fa-spinner fa-spin"></i>According to the Institute of Medicine, there are 44,000 to 98,000 deaths occur annually from medical errors. Of this total, an estimated 7,000 deaths occur due to ADRs. [1]
+                        </li>
+                        <li style="margin:10px 0;">
+                            <i class="fa-li fa fa-spinner fa-spin"></i>It’s currently a public health concern as it’s the leading cause of mortality in the the U.S. The cost of drug-related morbidity and mortality is $136 billion annually. [2] 
+                        </li>
+                        <li style="margin:10x 0;">
+                            <i class="fa-li fa fa-spinner fa-spin"></i>Advancement in this field will allow more accurate and faster diagnosis of ADRs which will improve patient quality of life and reducing the error, cost in ADR detection.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="jumbotron" style="background:transparent">
+            <h2 class="display-4" style="text-align:center;color:whitesmoke">About Me</h2>
+            <div class="container-fluid" style="margin-top: 50px;margin-bottom: 50px;max-width:20%;max-height:20%;">
+                <img alt="Me" src="{{ url_for('static',filename='/me.png') }}" class="center">
+            </div>            
+            <p style="font-size:larger; text-align:center;color:whitesmoke;">Hi, my name is Khoi Nguyen and I'm currently a computer science at the university of Manchester.</p>
         </div>
         <div class="container-fluid" style="margin-top: 50px;margin-bottom: 50px; background-color:#9575cd; width: 50%;">
             <img alt="UoM" src="{{ url_for('static',filename='/spacy_logo.png') }}" class="center">
