@@ -1,0 +1,115 @@
+html {
+  scroll-behavior: smooth;
+}
+/* CSS for navbar, body and display blocks*/
+.navbar {
+  background: #9796f0;
+  background: -webkit-linear-gradient(to right, #fbc7d4, #9796f0);
+  background: linear-gradient(to right, #fbc7d4, #9796f0);
+  opacity: 90%;
+}
+.jumbotron {
+  margin-top: 100px;
+  width:75%;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+body {
+  /* Very nice background */
+  background: #9796f0;
+  background: -webkit-linear-gradient(to right, #fbc7d4, #9796f0);
+  background: linear-gradient(to right, #fbc7d4, #9796f0);
+  font-family: 'Advent Pro';
+  font-size: 22px;
+  position: relative;
+  min-height: 400px;
+  margin-bottom: 100px;
+  clear: both;
+}
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.Site-content {
+  flex: 1;
+}
+.main-section{
+	margin:0 auto;
+	margin-top: 100px;
+	background-color: #fff;
+	box-shadow: 0px 0px 20px #c1c1c1;
+}
+
+/* CSS for 2 and 3 columns content display render*/
+.column {
+  float: left;
+}
+.column_3 {
+  float: left;
+  width: 33.33%;
+  text-align: center;
+}
+.left {
+  width: 50%;
+}
+.right {
+  width: 50%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.vertical-center {
+  width: 80%;
+  height: 80%;
+  align-items: center;
+}
+.center {
+  width: 100%;
+}
+
+#column_original{
+	background-color:#54424A;
+  color:white;
+}
+
+#column_result{
+	background-color:#FFF4FD;
+	color:black;
+}
+
+/* Wrapper to center buttons.*/
+.wrapper {
+  text-align: center;
+  margin-bottom:2vh;
+}
+
+.button {
+  position: absolute;
+  float: left;
+  border: 1px;
+}
+
+/* Container holding the image and the text */
+.container-fluid {
+  position: relative;
+  text-align: center;
+  color: transparent;
+}
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+b {
+  font-size: large;
+}
+
+

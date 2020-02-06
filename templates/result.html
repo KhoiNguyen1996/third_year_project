@@ -33,7 +33,7 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/previewer">Previewer</a>
+                    <a class="nav-link" href="#">Previewer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
@@ -43,10 +43,10 @@
     </nav>
 
     <main class="Site-content">
-        <div class="jumbotron" style="margin-bottom:0; background-color:transparent;color:#fff">
+        <div class="jumbotron" style="margin-bottom:0; background-color:#9575cd;color:#fff">
             <h2 class="display-4" style="text-align:center;color:whitesmoke">Name Entity Visualizer using spaCy</h2>
             <p style="font-size:medium; text-align:center;color:whitesmoke;">Select a model then input a sentence or paragraph the software will extract Adverse Drug Reaction name entities</p>
-            <form method="POST" action="{{ url_for('extract')}}">
+            <form method="POST" action="{{ url_for('result_page') }}">
                 <div class="wrapper">
 
                     <div class="text-center">
@@ -64,37 +64,44 @@
 
                 <div class="wrapper">
                     <select class="browser-default custom-select" name="selected_model" method="GET">
-                        <option value="en_core_web_sm" disabled="disabled" >Please select a pretrained Name Entity Recognition model</option>
-                        {% for model in model_names %}
-                        <option value="{{ model_names[model] }}" selected>{{ model }}</option>" {% endfor %}
+                        <option value="en_core_web_sm" disabled="disabled">Please select a pretrained Name Entity Recognition model</option>
+                        {% for model in model_name %}
+                        <option value="{{ model_name[model] }}" selected>{{ model }}</option>" {% endfor %}
                     </select>
                 </div>
 
                 <div class="textarea-container" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
-                    <textarea class="form-control z-depth-1" name="rawtext" rows="13" placeholder="Please write something here and press the submit button..."></textarea>
+                    <textarea class="form-control z-depth-1" name="input_text" rows="13" placeholder="Please write something here and press the submit button..."></textarea>
                 </div>
 
             </form>
 
         </div>
 
-        <!-- Displaying original input -->
         <div id="start_pos" class="jumbotron" style="background-color:#D5609F;color:#fff">
-            <div class="row">
+            <h2 class="display-4" style="font-size:xx-large;text-align:center;color:whitesmoke">Sentiment Analysis</h2>
+            <h2 class="display-4" style="font-size:x-large;text-align:center;color:whitesmoke">{{ text_sentiment }}</h2>
+                    <div class="progress md-progress" style="margin-top:3vh; height: 20px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width:{{ text_polarity }}%" aria-valuenow="0.5" aria-valuemin="-1" aria-valuemax="1">Postive</div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width:{{ other_polarity }}%" aria-valuenow="0.5" aria-valuemin="-1" aria-valuemax="1">Negative</div>
+
+            </div>
+            <!-- Displaying original input -->
+            <div class="row" style="margin-top:8vh;">
                 <div class="col-md-6">
-                    <h4>Input Data</h4>
+                    <h2 class="display-4" style="font-size:xx-large;text-align:center;color:whitesmoke">Input Data</h2>
 
                     <div class="card mb-10 shadow-sm" id="column_original">
-                        <p>{{ rawtext|markdown }}</p>
+                        <p>{{ input_text|markdown }}</p>
 
                     </div>
                 </div>
-                <!-- Displaying name entity result from model -->
+                <!-- Displaying name entity output result from selected model -->
                 <div class="col-md-6">
-                    <h4>Output Data with NER</h4>
+                    <h2 class="display-4" style="font-size:xx-large;text-align:center;color:whitesmoke">Output Data</h2>
 
                     <div class="card mb-10 shadow-sm" id="column_result">
-                        <p>{{ result|markdown }}</p>
+                        <p>{{ output_text|markdown }}</p>
 
                     </div>
                 </div>
@@ -150,16 +157,9 @@
     <!-- Bootstrap JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('html, body').animate({
-                scrollTop: $('#start_pos').offset().top
-            }, 'slow');
-        });
-    </script>
 
     <!--Script to load javascript file -->
-    <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/main_page.js')}}"></script>
     <script type="text/javascript">
         $('.file_upload').file_upload();
     </script>

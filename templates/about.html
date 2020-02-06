@@ -44,12 +44,19 @@
     </nav>
 
     <main class="Site-content">
+        <div class="jumbotron" style="background:#9575cd;">
+            <h2 class="display-4" style="text-align:center;color:whitesmoke">About Me</h2>
+            <div class="container-fluid" style="margin-top: 50px;margin-bottom: 50px;max-width:20%;max-height:20%;">
+                <img alt="Me" src="{{ url_for('static',filename='/me.png') }}" class="center">
+            </div>            
+            <p style="font-size:larger; text-align:center;color:whitesmoke;">Hi, my name is Khoi Nguyen and I'm a computer science at the university of Manchester. This is my third year project where I apply NLP techniques in order to extract name entities from a given text.</p>
+        </div>
         <div class="jumbotron" style="text-align:center;margin-bottom:0;background-color: #FF4C7C;color:#fff">
             <ul class="list-group">
                 <li class="list-group-item" style="background:transparent;border-style:none;">
                     <h2 class="display-4" style="font-size:xx-large;color:whitesmoke;">Why is this project <b style="font-size:xx-large;">important</b>?</h2>
                     <ul class="fa-ul">
-                        <li style="margin:10px 0;">
+                        <li style="margin-top:20px;">
                             <i class="fa-li fa fa-spinner fa-spin"></i>According to the Institute of Medicine, there are 44,000 to 98,000 deaths occur annually from medical errors. Of this total, an estimated 7,000 deaths occur due to ADRs. [1]
                         </li>
                         <li style="margin:10px 0;">
@@ -62,14 +69,7 @@
                 </li>
             </ul>
         </div>
-        <div class="jumbotron" style="background:transparent">
-            <h2 class="display-4" style="text-align:center;color:whitesmoke">About Me</h2>
-            <div class="container-fluid" style="margin-top: 50px;margin-bottom: 50px;max-width:20%;max-height:20%;">
-                <img alt="Me" src="{{ url_for('static',filename='/me.png') }}" class="center">
-            </div>            
-            <p style="font-size:larger; text-align:center;color:whitesmoke;">Hi, my name is Khoi Nguyen and I'm currently a computer science at the university of Manchester.</p>
-        </div>
-        <div class="container-fluid" style="margin-top: 50px;margin-bottom: 50px; background-color:#9575cd; width: 50%;">
+        <div class="container-fluid" style="margin-top: 50px;margin-bottom: 50px; background-color:transparent; width: 50%;">
             <img alt="UoM" src="{{ url_for('static',filename='/spacy_logo.png') }}" class="center">
         </div>
     </main>
@@ -132,7 +132,8 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.3/js/mdb.min.js"></script>
 
-    <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+    <!--Script to load javascript file -->
+    <script src="{{ url_for('static', filename='js/main_page.js')}}"></script>
     <script type="text/javascript">
         $('.file_upload').file_upload();
     </script>
