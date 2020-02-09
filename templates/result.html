@@ -43,7 +43,7 @@
     </nav>
 
     <main class="Site-content">
-        <div class="jumbotron" style="margin-bottom:0; background-color:#9575cd;color:#fff">
+        <div class="jumbotron" style="margin-bottom:0;background-color:#9575cd;color:#fff">
             <h2 class="display-4" style="text-align:center;color:whitesmoke">Name Entity Visualizer using spaCy</h2>
             <p style="font-size:medium; text-align:center;color:whitesmoke;">Select a model then input a sentence or paragraph the software will extract Adverse Drug Reaction name entities</p>
             <form method="POST" action="{{ url_for('result_page') }}">
@@ -51,27 +51,27 @@
 
                     <div class="text-center">
 
-                        <div class="btn-group" style="align-items: center;">
+                        <div class="btn-toolbar" style="justify-content: center; display: flex;" >
 
-                            <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
+                            <button type="reset" class="btn btn-danger"><i class="fa fa-eraser fa-3x"></i></button>
 
-                            <a class="btn btn-success waves-effect" href="/" role="button">Refresh &raquo;</a>
+                            <a class="btn btn-primary  waves-effect" href="/" role="button"><i class="fa fa-home fa-3x"></i></a>
 
-                            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-arrow-right fa-3x"></i></button>
                         </div>
                     </div>
                 </div>
 
                 <div class="wrapper">
                     <select class="browser-default custom-select" name="selected_model" method="GET">
-                        <option value="en_core_web_sm" disabled="disabled">Please select a pretrained Name Entity Recognition model</option>
+                        <option disabled="disabled" >Please select a pretrained Name Entity Recognition model</option>
                         {% for model in model_name %}
                         <option value="{{ model_name[model] }}" selected>{{ model }}</option>" {% endfor %}
                     </select>
                 </div>
 
                 <div class="textarea-container" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
-                    <textarea class="form-control z-depth-1" name="input_text" rows="13" placeholder="Please write something here and press the submit button..."></textarea>
+                    <textarea class="form-control z-depth-1" name="input_text" rows="12" placeholder="Please write something here and press the green button..."></textarea>
                 </div>
 
             </form>
