@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Extracting ADRs name entities from text - spaCy</title>
+    <title>Results - spaCy</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,9 +31,6 @@
             <ul style="text-align:center;" class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Previewer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
@@ -71,7 +68,7 @@
                 </div>
 
                 <div class="textarea-container" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
-                    <textarea class="form-control z-depth-1" name="input_text" rows="12" placeholder="Please write something here and press the green button..."></textarea>
+                    <textarea style="background-color: #E0E0E0;border-color: transparent;" class="form-control z-depth-1" name="input_text" rows="12" placeholder="Please write something here and press the →green button..."></textarea>
                 </div>
 
             </form>
@@ -79,7 +76,11 @@
         </div>
 
         <div id="start_pos" class="jumbotron" style="background-color:#D5609F;color:#fff">
-            <h2 class="display-4" style="font-size:xx-large;text-align:center;color:whitesmoke">Sentiment Analysis</h2>
+            <h2 class="display-4" style="font-size:xx-large;text-align:center;color:whitesmoke">Sentiment Analysis
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </h2>
             <h2 class="display-4" style="font-size:x-large;text-align:center;color:whitesmoke">{{ text_sentiment }}</h2>
                     <div class="progress md-progress" style="margin-top:3vh; height: 20px;">
                         <div class="progress-bar bg-success" role="progressbar" style="width:{{ text_polarity }}%" aria-valuenow="0.5" aria-valuemin="-1" aria-valuemax="1">Postive</div>

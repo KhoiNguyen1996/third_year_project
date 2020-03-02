@@ -33,9 +33,6 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Previewer</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
                 </li>
             </ul>
@@ -45,10 +42,19 @@
     <main class="Site-content">
         <div class="jumbotron" style="background:#9575cd;">
             <h2 class="display-4" style="text-align:center;color:whitesmoke">About Me</h2>
-            <div class="container-fluid" style="margin-top: 50px;margin-bottom: 50px;max-width:20%;max-height:20%;">
-                <img alt="Me" src="{{ url_for('static',filename='/me.png') }}" class="center">
-            </div>            
-            <p style="font-size:larger; text-align:center;color:whitesmoke;">Hi, my name is Khoi Nguyen and I'm a computer science at the university of Manchester. This is my third year project where I apply NLP techniques in order to extract name entities from a given text.</p>
+            <div class="row" style="margin-top: 3vh;">
+                <div class="col-md-6">
+                    <div class="container-fluid" style="max-width:50%;max-height:20%">
+                        <img alt="Me" src="{{ url_for('static',filename='/me.png') }}" class="center">
+                    </div> 
+                </div>
+                <div class="col-md-6">
+                    <p style="font-size:larger; text-align:center;color:whitesmoke;margin-top: 2vh;">
+                        Hi, my name is Khoi Nguyen and I'm a computer science at the university of Manchester. This is my third year project where I apply NLP techniques in order to extract name entities related to adverse drug reactions from a given text. <br><br>The data was provided by Professor Sophia Ananiadou and it’s consisted of social media Tweet messages, Cadec and Corpus of various Biology textbooks with the drug name, symptoms and treatments labelled. We used various packages such as NLTK, Spacy, NumPy and many more machine learning related library in order to implement this project.
+                    </p>
+                </div>
+            </div>
+        
         </div>
         <div class="jumbotron" style="text-align:center;margin-bottom:0;background-color: #FF4C7C;color:#fff">
             <ul class="list-group">
