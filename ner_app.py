@@ -22,8 +22,8 @@ OUTPUT_WRAPPER = """<div style="overflow-x:auto;padding:1rem">{}</div>"""
 MODEL_PATH="./pretrained_model/spacy"
 
 # Preset color and tag template for symptoms, drugs and dosage.
-adr_ner_colors = {"SYMP": "#9370DB", "DRUG": "#F58B4C", "DOSE": "#B5C689"}
-OPTIONS = {"ents": ["SYMP","DRUG","DOSE"], "colors": adr_ner_colors}
+NER_PRESET_COLORS = {"SYMP": "#9370DB", "DRUG": "#F58B4C", "DOSE": "#B5C689"}
+OPTIONS = {"ents": ["SYMP","DRUG","DOSE"], "colors": NER_PRESET_COLORS}
 
 def get_models(directory):
 	# Input the file directory of the models (hard coded)
@@ -31,8 +31,8 @@ def get_models(directory):
 	result = {}
 
 	# Add 2 spaCy pretrained default models.
-	result["en_core_web_sm"]="en_core_web_sm"
-	result["en_core_web_md"]="en_core_web_md"
+	#result["en_core_web_sm"]="en_core_web_sm"
+	#result["en_core_web_md"]="en_core_web_md"
 
 	for file in os.listdir(directory):
 		result[file]=os.path.join(directory, file)
@@ -76,6 +76,9 @@ def index_page():
 @app.route('/results',methods=["GET","POST"])
 def result_page():
 	if request.method == 'POST':
+		#ent_arr = request.form['render_drug'] + request.form['render_symptom'] + request.form['render_dose']
+		OPTIONS["ents"] = request.form.getlist('render_ner_list')
+
 		# Initiate model depending on user's choice.
 		selected_model = request.form['selected_model']
 		nlp = spacy.load(os.path.join(selected_model))

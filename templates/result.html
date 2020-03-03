@@ -59,7 +59,24 @@
                     </div>
                 </div>
 
-                <div class="wrapper">
+                <div class="wrapper" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
+                    <div class="text-center">
+                        <!--Classic checkbox buttons-->
+                        <div class="btn-group" data-toggle="buttons" style="justify-content: center; display: flex;">
+                            <label class="btn btn-deep-orange active form-check-label">
+                                <input type="checkbox" class="form-check-input" checked autocomplete="off" name="render_ner_list" value="DRUG">DRUG
+                            </label>
+                            <label class="btn btn-secondary active form-check-label">
+                                <input type="checkbox" class="form-check-input" checked autocomplete="off" name="render_ner_list" value="SYMP">SYMPTOM
+                            </label>
+                            <label class="btn btn-light-green active form-check-label">
+                                <input type="checkbox" class="form-check-input" checked autocomplete="off" name="render_ner_list" value="DOSE">DOSE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrapper" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
                     <select class="browser-default custom-select" name="selected_model" method="GET">
                         <option disabled="disabled" >Please select a pretrained Name Entity Recognition model</option>
                         {% for model in model_name %}

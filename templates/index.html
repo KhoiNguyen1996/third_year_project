@@ -48,7 +48,7 @@
 
                     <div class="text-center">
 
-                        <div class="btn-toolbar" style="justify-content: center; display: flex;" >
+                        <div class="btn-toolbar" style="justify-content: center; display: flex;">
 
                             <button type="reset" class="btn btn-danger"><i class="fa fa-eraser fa-3x"></i></button>
 
@@ -59,9 +59,26 @@
                     </div>
                 </div>
 
-                <div class="wrapper">
+                <div class="wrapper" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
+                    <div class="text-center">
+                        <!--Classic checkbox buttons-->
+                        <div class="btn-group" data-toggle="buttons" style="justify-content: center; display: flex;">
+                            <label class="btn btn-deep-orange active form-check-label">
+                                <input type="checkbox" class="form-check-input" checked autocomplete="off" name="render_ner_list" value="DRUG">DRUG
+                            </label>
+                            <label class="btn btn-secondary active form-check-label">
+                                <input type="checkbox" class="form-check-input" checked autocomplete="off" name="render_ner_list" value="SYMP">SYMPTOM
+                            </label>
+                            <label class="btn btn-light-green active form-check-label">
+                                <input type="checkbox" class="form-check-input" checked autocomplete="off" name="render_ner_list" value="DOSE">DOSE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrapper" style="width:85%;display:block;margin-left:auto;margin-right:auto;">
                     <select class="browser-default custom-select" name="selected_model" method="GET">
-                        <option disabled="disabled" >Please select a pretrained Name Entity Recognition model</option>
+                        <option disabled="disabled">Please select a pretrained Name Entity Recognition model</option>
                         {% for model in model_name %}
                         <option value="{{ model_name[model] }}" selected>{{ model }}</option>" {% endfor %}
                     </select>
@@ -111,15 +128,28 @@
 
         <div class="jumbotron" style="text-align:center;margin-bottom:0;background-color:#D5609F;color:#fff">
             <li class="list-group-item" style="background:transparent;border-style:none;">
-                <h2 class="display-4" style="font-size:xx-large;color:whitesmoke;">What data sets and machine learning model did I used?</h2>
-                <p style="margin-top:20px;">The corpus described in the following article will be available for download here.<br>
-                Development of a Benchmark Corpus to Support the Identification of Adverse Drug Effects from Case Reports<br>
-                Harsha Gurulingappa, Abdul Mateen-Rajput, Angus Roberts, Juliane Fluck, Martin Hofmann-Apitius, and Luca Toldo<br>
-                Journal of Biomedical Informatics, In Press, 2012.<br>
-                http://www.sciencedirect.com/science/article/pii/S1532046412000615
-                    
-                </p>
+                <h2 class="display-4" style="font-size:xx-large;color:whitesmoke;">Which data sets and machine learning model did I used?</h2>
+                <ul class="fa-ul">
+                    <li style="margin-top:20px;">
+                        <i class="fa-li fa fa-spinner fa-spin"></i>I used spaCy library in other to implemented the model that was used for this Named Enitity Recognition task.
+                    </li>
+                    <li style="margin:8px 0;">
+                        <i class="fa-li fa fa-spinner fa-spin"></i>The model use a deep Convolution Neural Network with residual connections for it's custom model training.
+                    </li>
+                    <li style="margin:8px 0;">
+                        <i class="fa-li fa fa-spinner fa-spin"></i>It's a statistical model and it's use a transition-based approach to named entity parsing.
+                    </li>
+                    <li style="margin:8px 0;">
+                        <i class="fa-li fa fa-spinner fa-spin"></i>Furthermore, I also experimented with different word embedding techniques such as spaCy's Bloom Embedding, Word2Vec and Glove.
+                    </li>
+                </ul>
             </li>
+            <p style="margin-top:5vh;">Development of a Benchmark Corpus to Support the Identification of Adverse Drug Effects from Case Reports
+                <br> Harsha Gurulingappa, Abdul Mateen-Rajput, Angus Roberts, Juliane Fluck, Martin Hofmann-Apitius, and Luca Toldo
+                <br> Journal of Biomedical Informatics, In Press, 2012.
+                <br> The corpus described in the following article will be available for download <a href="https://sites.google.com/site/adecorpus/home/document">here.</a>
+                <br> http://www.sciencedirect.com/science/article/pii/S1532046412000615
+            </p>
             <div class="container" style="margin-top: 5vh;">
                 <ul class="list-unstyled list-inline text-center">
                     <li class="list-inline-item">
@@ -149,11 +179,10 @@
 
         <div class="container-fluid" style="margin-top:50px;margin-bottom:50px; width: 50%;">
             <img alt="spacy_logo" src="{{ url_for('static',filename='/spacy_logo.png') }}" class="center">
-            <div class="centered">@Joanne__Howe I'm good been on 25mg MTX for years then switched to leflunomide back MTX the other caused tummy trouble. Why r u off Enbrel.
-Pheripheral edema was observed in five female patients after taking proton pump inhibitors omeprazole, lansoprazole, or pantoprazole for 7-15 days for peptic acid diseases in recommended standard doses.
-The Fluoroquinolone Syndrome -Have you experienced side effects from taking Quinolones antibiotics (e.g. Cipro) ? 
-@calyxxx same with venlafaxine, 1 user I spoke to yrs ago stopped taking that when she started having acid like trips losing hours at a time.
-We describe the infectious toxicities experienced by the first two patients in our institution treated with dexamethasone (10 mg/m(2)/day for 4 weeks with gradual tapering) during induction according to the dexamethasone arm of BFM 2000 and review the relevant literature that suggests an increased risk of infectious complications with dexamethasone.
+            <div class="centered">We describe the infectious toxicities experienced by the first two patients in our institution treated with dexamethasone (10 mg/m(2)/day for 4 weeks with gradual tapering) during induction according to the dexamethasone arm of BFM 2000 and review the relevant literature that suggests an increased risk of infectious complications with dexamethasone.<br>
+            We report five cases of carboplatin (CBDCA) hypersensitivity after weekly low-dose paclitaxel (60 mg/m2)/CBDCA (area under the concentration curve = 2) therapy in patients with recurrent ovarian cancer receiving multiple platinum-based chemotherapy.<br>
+            @DiabetesUK bit of advise please. I've stopped Gliclazide but still taking Metformin & Victoza. Do I need to notify DVLA & ins co? Thanks<br>
+            I Take 500mg Of Lamictal Everyday I'm Tired Leave Me Alone
             </div>
         </div>
 

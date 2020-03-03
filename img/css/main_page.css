@@ -112,4 +112,6 @@ b {
   font-size: large;
 }
 
-
+b.named_entity_group {
+  color: black;
+}
